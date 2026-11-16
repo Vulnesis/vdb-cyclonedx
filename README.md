@@ -4,6 +4,8 @@
 
 # vdb-cyclonedx
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Vulnetix/vdb-cyclonedx)
+
 CycloneDX SBOM parser and schema validator for Go, supporting spec versions **1.2 through 1.7** plus
 the official **2.0 development schema**.
 
