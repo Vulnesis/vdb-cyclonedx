@@ -14,7 +14,7 @@ func TestParseCDX_ToolsArrayForm(t *testing.T) {
 		"bomFormat":"CycloneDX","specVersion":"1.4","serialNumber":"urn:uuid:00000000-0000-4000-8000-000000000014","version":1,
 		"metadata":{
 			"timestamp":"2026-05-30T00:00:00Z",
-			"tools":[{"vendor":"Vulnesis","name":"vulnetix-sca","version":"v3.9.1","hashes":[{"alg":"SHA-256","content":"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"}]}]
+			"tools":[{"vendor":"Vulnetix","name":"vulnetix-sca","version":"v3.9.1","hashes":[{"alg":"SHA-256","content":"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"}]}]
 		},
 		"components":[{"type":"library","name":"lodash","version":"4.17.21","purl":"pkg:npm/lodash@4.17.21"}]
 	}`)
@@ -26,7 +26,7 @@ func TestParseCDX_ToolsArrayForm(t *testing.T) {
 		t.Fatalf("expected 1 tool component, got %+v", bom.Metadata.Tools)
 	}
 	tm := ExtractToolMeta(bom)
-	if tm.ToolName != "vulnetix-sca" || tm.ToolVersion != "v3.9.1" || tm.ToolVendor != "Vulnesis" ||
+	if tm.ToolName != "vulnetix-sca" || tm.ToolVersion != "v3.9.1" || tm.ToolVendor != "Vulnetix" ||
 		tm.ToolHash != "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef" {
 		t.Fatalf("array-form tool meta mismatch: %+v", tm)
 	}
@@ -40,7 +40,7 @@ func TestParseCDX_ToolsObjectForm(t *testing.T) {
 		"bomFormat":"CycloneDX","specVersion":"1.7","serialNumber":"urn:uuid:00000000-0000-4000-8000-000000000017","version":1,
 		"metadata":{
 			"timestamp":"2026-05-30T00:00:00Z",
-			"tools":{"components":[{"type":"application","name":"vulnetix-sca","version":"v3.9.1","publisher":"Vulnesis"}]}
+			"tools":{"components":[{"type":"application","name":"vulnetix-sca","version":"v3.9.1","publisher":"Vulnetix"}]}
 		},
 		"components":[{"type":"library","name":"left-pad","version":"1.3.0","purl":"pkg:npm/left-pad@1.3.0"}]
 	}`)
@@ -49,7 +49,7 @@ func TestParseCDX_ToolsObjectForm(t *testing.T) {
 		t.Fatalf("object-form tools must parse: %v", err)
 	}
 	tm := ExtractToolMeta(bom)
-	if tm.ToolName != "vulnetix-sca" || tm.ToolVendor != "Vulnesis" {
+	if tm.ToolName != "vulnetix-sca" || tm.ToolVendor != "Vulnetix" {
 		t.Fatalf("object-form tool meta mismatch: %+v", tm)
 	}
 }

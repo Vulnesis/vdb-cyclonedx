@@ -4,7 +4,7 @@ import "strings"
 
 // ── This product's identity in metadata.tools ────────────────────────────────
 //
-// One tool entry, built one way, for every document any Vulnesis command emits.
+// One tool entry, built one way, for every document any Vulnetix command emits.
 // Three implementations of this used to exist across two repositories, and the
 // output disagreed on more than cosmetics: some entries carried no version at
 // all, and four builders defaulted the version to the literal string "cli",
@@ -28,9 +28,12 @@ const (
 	ToolBOMMerge    = "vulnetix-bom-merge"
 	ToolBOMValidate = "vulnetix-bom-validate"
 
-	VulnetixToolGroup = "Vulnesis"
-	VulnetixSiteURL   = "https://www.vulnes.is"
-	VulnetixRepoURL   = "https://github.com/vulnesis/cli"
+	// The group, website and repository of a Vulnetix tool entry. Under the
+	// Vulnesis brand (VULNETIX_BRAND=vulnesis) VulnetixTool links its website
+	// to https://www.vulnes.is instead; the constants themselves never change.
+	VulnetixToolGroup = "Vulnetix"
+	VulnetixSiteURL   = "https://www.vulnetix.com"
+	VulnetixRepoURL   = "https://github.com/vulnetix/cli"
 
 	// UnknownToolVersion is what an unversioned build reports. It is a valid
 	// version string that sorts below every release, so a consumer comparing
@@ -49,7 +52,7 @@ var vulnetixToolNames = map[string]bool{
 	ToolBOMImport: true, ToolBOMMerge: true, ToolBOMValidate: true,
 }
 
-// VulnetixTool builds the metadata.tools entry for one Vulnesis command.
+// VulnetixTool builds the metadata.tools entry for one Vulnetix command.
 //
 // The entry carries more than a name because a tool table entry is a component,
 // and a consumer that wants to know what produced a document should not have to
@@ -67,7 +70,7 @@ func VulnetixTool(name, version string) Component {
 		Version: version,
 		Purl:    "pkg:golang/github.com/vulnetix/cli@v" + strings.TrimPrefix(version, "v"),
 		ExternalReferences: []ExternalReference{
-			{Type: "website", URL: VulnetixSiteURL},
+			{Type: "website", URL: siteURL()},
 			{Type: "vcs", URL: VulnetixRepoURL},
 		},
 	}
@@ -76,10 +79,11 @@ func VulnetixTool(name, version string) Component {
 // IsVulnetixToolName reports whether a tool name is one of this product's.
 //
 // It is string-keyed rather than component-keyed because the same question gets
-// asked of SARIF driver names ("Vulnesis Malscan", "Vulnesis SCA") when
+// asked of SARIF driver names ("Vulnetix Malscan", "Vulnetix SCA") when
 // deciding whether a report being relayed is one we generated ourselves — a
 // document this product produced must not be re-submitted as though a third
-// party had found it.
+// party had found it. Names from the Vulnesis brand ("Vulnesis Malscan",
+// "vulnesis-sca") are recognised as well as Vulnetix ones.
 func IsVulnetixToolName(name string) bool {
 	trimmed := strings.ToLower(strings.TrimSpace(name))
 	if trimmed == "" {
@@ -88,10 +92,11 @@ func IsVulnetixToolName(name string) bool {
 	if vulnetixToolNames[trimmed] {
 		return true
 	}
-	// Vulnesis runs in parity with Vulnetix: documents produced under
-	// either name are ours, in their "<name>-x" id and "<name> x" display forms.
-	for _, brand := range []string{"vulnetix", "vulnesis"} {
-		if trimmed == brand || strings.HasPrefix(trimmed, brand+"-") || strings.HasPrefix(trimmed, brand+" ") {
+	// The product ships under two brands; a tool name from either is ours.
+	for _, brand := range [...]string{"vulnetix", "vulnesis"} {
+		if trimmed == brand ||
+			strings.HasPrefix(trimmed, brand+"-") ||
+			strings.HasPrefix(trimmed, brand+" ") {
 			return true
 		}
 	}

@@ -37,7 +37,7 @@ func TestArticle15DoesNotCallTestSuiteFindingsAModelEvaluation(t *testing.T) {
 }
 
 func TestArticle15IsNotSatisfiedWithoutAccuracyEvidence(t *testing.T) {
-	// Everything Vulnesis can see about cybersecurity and robustness, and
+	// Everything Vulnetix can see about cybersecurity and robustness, and
 	// nothing at all about accuracy.
 	m := art15(ReportContext{
 		ScannerRunCount: 40, FindingTotal: 100, HasEvaluation: true,

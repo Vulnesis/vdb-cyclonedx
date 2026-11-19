@@ -163,7 +163,7 @@ func TestMarshalProjectsAwayMembersTheSpecVersionCannotCarry(t *testing.T) {
 		Metadata: &Metadata{
 			Manufacturer: &OrganizationalEntity{Name: "Acme Corp"},
 			Lifecycles:   []Lifecycle{{Phase: string(PhasePostBuild)}},
-			Tools:        &Tools{Components: []Component{{Type: "application", Name: "vulnetix-cdx", Version: "3.98.0", Group: "Vulnesis"}}},
+			Tools:        &Tools{Components: []Component{{Type: "application", Name: "vulnetix-cdx", Version: "3.98.0", Group: "Vulnetix"}}},
 		},
 	}
 
@@ -236,7 +236,7 @@ func TestLegacyProjectionRoundTrips(t *testing.T) {
 		BOMFormat:   "CycloneDX",
 		SpecVersion: "1.4",
 		Metadata: &Metadata{
-			Tools: &Tools{Components: []Component{{Type: "application", Name: "vulnetix-sca", Version: "3.98.0", Group: "Vulnesis"}}},
+			Tools: &Tools{Components: []Component{{Type: "application", Name: "vulnetix-sca", Version: "3.98.0", Group: "Vulnetix"}}},
 		},
 	}
 	out, err := json.Marshal(doc)
@@ -250,7 +250,7 @@ func TestLegacyProjectionRoundTrips(t *testing.T) {
 	if back.Metadata == nil || back.Metadata.Tools == nil || len(back.Metadata.Tools.Components) != 1 {
 		t.Fatalf("producer lost across 1.4 projection: %s", out)
 	}
-	if got := back.Metadata.Tools.Components[0]; got.Name != "vulnetix-sca" || got.Group != "Vulnesis" {
+	if got := back.Metadata.Tools.Components[0]; got.Name != "vulnetix-sca" || got.Group != "Vulnetix" {
 		t.Fatalf("producer altered across 1.4 projection: %#v", got)
 	}
 }

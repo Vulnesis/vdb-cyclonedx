@@ -320,7 +320,7 @@ func sbomPackageComponent(pkg SBOMPackage, canonicalSPDXID func(string) string) 
 	return comp
 }
 
-// SBOMPurl builds a best-effort package URL for common Vulnesis ecosystems.
+// SBOMPurl builds a best-effort package URL for common Vulnetix ecosystems.
 func SBOMPurl(name, version, ecosystem string) string {
 	purlType := sbomPurlType(ecosystem)
 	if purlType == "" || name == "" {

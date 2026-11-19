@@ -14,7 +14,7 @@ const (
 	// KindWontFix: the finding is real and the owner has decided not to act.
 	// Becomes a rule.
 	KindWontFix Kind = "wont_fix"
-	// KindMitigated is only produced from a Vulnesis marker for a mitigated
+	// KindMitigated is only produced from a Vulnetix marker for a mitigated
 	// rule. A third-party "protected by a control" statement is triage only.
 	KindMitigated Kind = "mitigated"
 	// KindTriageOnly: a real decision that is not a suppression (not affected,
@@ -36,7 +36,7 @@ const (
 	// BasisText: only prose says it (OpenVEX action_statement). A rule on this
 	// basis starts inactive and waits for review.
 	BasisText Basis = "text"
-	// BasisMarker: a Vulnesis marker names the rule.
+	// BasisMarker: a Vulnetix marker names the rule.
 	BasisMarker Basis = "marker"
 )
 
@@ -53,7 +53,7 @@ type Disposition struct {
 	SuppressionType string `json:"suppressionType,omitempty"`
 	// Reason says, in a sentence, what in the document led here.
 	Reason string `json:"reason"`
-	// Marker is set when the statement carries a Vulnesis marker.
+	// Marker is set when the statement carries a Vulnetix marker.
 	Marker *Marker `json:"marker,omitempty"`
 }
 
@@ -81,7 +81,7 @@ func Classify(s Statement) Disposition {
 			Rule:            true,
 			Active:          true,
 			SuppressionType: m.Type,
-			Reason:          "Minted by Vulnesis for suppression rule " + m.UUID,
+			Reason:          "Minted by Vulnetix for suppression rule " + m.UUID,
 			Marker:          &mm,
 		}
 	}

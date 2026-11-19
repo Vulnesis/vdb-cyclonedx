@@ -26,7 +26,7 @@ func riskCtx(custom bool) ReportContext {
 	return ReportContext{
 		FindingTotal:          12,
 		ScannerRunCount:       6,
-		RiskStrategyName:      "Vulnesis default",
+		RiskStrategyName:      "Vulnetix default",
 		RiskStrategyRuleCount: 22,
 		RiskStrategyIsCustom:  custom,
 		TriagePolicyName:      "Standard",

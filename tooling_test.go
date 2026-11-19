@@ -4,7 +4,7 @@ import "testing"
 
 // The tool table is a sequence: the author first, then each transformer in the
 // order it touched the document. FindVulnetixTool must return the author even
-// when a later Vulnesis command enriched the document, and the returned pointer
+// when a later Vulnetix command enriched the document, and the returned pointer
 // must alias the table entry so a caller can act on the real component.
 func TestFindVulnetixToolReturnsTheAuthorEntry(t *testing.T) {
 	doc := &Document{

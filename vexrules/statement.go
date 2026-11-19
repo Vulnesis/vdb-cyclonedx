@@ -1,5 +1,5 @@
 // Package vexrules decides what a VEX statement means for a finding, and
-// carries the suppression-rule matcher every Vulnesis service shares.
+// carries the suppression-rule matcher every Vulnetix service shares.
 //
 // A VEX statement and a suppression rule make the same kind of claim: this
 // finding should not be acted on, for this reason. Before this package the two
