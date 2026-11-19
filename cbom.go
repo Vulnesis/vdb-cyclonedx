@@ -2,7 +2,7 @@ package cyclonedx
 
 // CBOM — Cryptography Bill of Materials.
 //
-// This file owns the Vulnetix CBOM format end to end: the detection data model
+// This file owns the Vulnesis CBOM format end to end: the detection data model
 // (the contract between a producer's crypto-detection layer and the BOM), the
 // property vocabulary (vulnetix:cbom/*, vulnetix:crypto/*), creation
 // (BuildCBOM: detections -> validated CycloneDX) and parsing (ParseCBOM:

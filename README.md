@@ -1,16 +1,16 @@
 <p align="center">
-  <img src="pix.svg" alt="Pix, the Vulnetix mascot" width="110">
+  <img src="pix.svg" alt="Pix, the Vulnesis mascot" width="110">
 </p>
 
 # vdb-cyclonedx
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Vulnetix/vdb-cyclonedx)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Vulnesis/vdb-cyclonedx)
 
 CycloneDX SBOM parser and schema validator for Go, supporting spec versions **1.2 through 1.7** plus
 the official **2.0 development schema**.
 
 Extracted (behavior-preserving) from `vdb-api-cyclonedx-uploads`'s internal parser so it can be
-shared across Vulnetix services — currently `vdb-api-cyclonedx-uploads` (SBOM upload pipeline) and
+shared across Vulnesis services — currently `vdb-api-cyclonedx-uploads` (SBOM upload pipeline) and
 `vdb-sca-monitor` (scheduled SCA re-evaluation).
 
 ```go
@@ -28,7 +28,7 @@ See [PLAN.md](./PLAN.md) for the full design and extraction plan.
 
 ## Generating an SBOM (`BuildSBOM`)
 
-Other Go projects can generate the same Vulnetix CycloneDX document shape by
+Other Go projects can generate the same Vulnesis CycloneDX document shape by
 importing `github.com/Vulnetix/vdb-cyclonedx` directly:
 
 ```go
@@ -91,7 +91,7 @@ against the bundled schemas with `TestRealCapturedDocuments`, which skips unless
 
 The conformance run itself is the `publish-tea` job in `.github/workflows/vulnetix.yml` (triggered
 on push, release, or manually via `workflow_dispatch`); it delegates to
-`Vulnetix/cli/.github/workflows/tea-release.yml`.
+`Vulnesis/cli/.github/workflows/tea-release.yml`.
 
 ## VEX dispositions and suppression rules (`vexrules/`)
 
@@ -105,12 +105,12 @@ action text, CSAF flags and remediations. Only two dispositions become suppressi
 | `wont_fix` | CycloneDX `exploitable` + `will_not_fix`, or `can_not_fix` alone; CSAF `known_affected` + `no_fix_planned` with no `vendor_fix` | active |
 | `wont_fix` read from text | OpenVEX `affected` whose `action_statement` says it will not be fixed | inactive, pending review |
 | `conflict` | a won't fix response together with `update`, `rollback` or a `vendor_fix` | none, flagged |
-| `mitigated` | only a Vulnetix marker for a mitigated rule | links to that rule |
+| `mitigated` | only a Vulnesis marker for a mitigated rule | links to that rule |
 | `triage_only`, `undecided` | every other state | none |
 
 A `vulnetix:suppression/{type,uuid,source}` marker (a CycloneDX property, an OpenVEX
 `status_notes` line or a CSAF note) links a statement back to the rule that minted it, so
-re-ingesting Vulnetix VEX does not create a second rule. The package also holds the rule
+re-ingesting Vulnesis VEX does not create a second rule. The package also holds the rule
 matcher (`RuleMatches`) and the identity ladder (`NewIdentity`) the services share.
 
 The classifier's cases are in `vexrules/testdata/classify-golden.json`. The website keeps a

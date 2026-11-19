@@ -32,7 +32,7 @@ import (
 //
 // The identity is deliberately not fixed here. The CLI signs with whatever
 // identity the runner already has, because a scan run in a customer's CI should
-// be attested by that customer, not by Vulnetix. Vulnetix services sign with
+// be attested by that customer, not by Vulnetix. Vulnesis services sign with
 // the SPIFFE identity Authentik issues them. Both are just a function returning
 // a token.
 
@@ -303,7 +303,7 @@ func (f *FulcioSigner) logEntry(ctx context.Context, digest, der []byte, chainPE
 
 // AmbientIdentityToken finds an OIDC token in the environment.
 //
-// This is what makes the CLI's --sign useful without any Vulnetix credential:
+// This is what makes the CLI's --sign useful without any Vulnesis credential:
 // in a customer's CI the runner already has an identity that public Fulcio
 // accepts, and a document attested by whoever ran the scan is a more useful
 // claim than one attested by the tool vendor.

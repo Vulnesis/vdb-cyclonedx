@@ -25,7 +25,7 @@ import (
 // all: a proof of possession over the wrong bytes is accepted by nothing, and
 // discovering that against public Fulcio means discovering it in production.
 
-const testSPIFFEID = "spiffe://sigstore.vulnetix.com/code-scanner"
+const testSPIFFEID = "spiffe://sigstore.vulnes.is/code-scanner"
 
 // unsignedJWT builds a token with the given subject. The signature is never
 // checked here, because verification is the CA's job and this stands in for the
@@ -36,7 +36,7 @@ func unsignedJWT(t *testing.T, subject string) string {
 	claims, err := json.Marshal(map[string]any{
 		"sub": subject,
 		"aud": SigstoreAudience,
-		"iss": "https://auth.vulnetix.com/application/o/sigstore/",
+		"iss": "https://auth.vulnes.is/application/o/sigstore/",
 	})
 	if err != nil {
 		t.Fatalf("claims: %v", err)
@@ -307,7 +307,7 @@ func TestFulcioSignerReportsAnUnloggedSignature(t *testing.T) {
 func TestFulcioRejectionMessageReachesTheCaller(t *testing.T) {
 	// A different subject than the token carries, so the stub's proof check
 	// fails the same way real Fulcio would for a mismatched identity.
-	fulcio := fulcioStub(t, "spiffe://sigstore.vulnetix.com/somebody-else")
+	fulcio := fulcioStub(t, "spiffe://sigstore.vulnes.is/somebody-else")
 	defer fulcio.Close()
 
 	signer := &FulcioSigner{

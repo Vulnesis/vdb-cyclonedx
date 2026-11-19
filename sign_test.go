@@ -23,7 +23,7 @@ func testSigner(t *testing.T) (*LocalSigner, *ecdsa.PublicKey) {
 	if err != nil {
 		t.Fatalf("generate key: %v", err)
 	}
-	return &LocalSigner{Key: key, KeyID: "spiffe://sigstore.vulnetix.com/code-scanner"}, &key.PublicKey
+	return &LocalSigner{Key: key, KeyID: "spiffe://sigstore.vulnes.is/code-scanner"}, &key.PublicKey
 }
 
 func testDocument(t *testing.T) []byte {
@@ -116,7 +116,7 @@ func TestSignedDocumentStillValidates(t *testing.T) {
 	if doc.Signature.Algorithm != "ES256" {
 		t.Fatalf("algorithm = %q, want ES256", doc.Signature.Algorithm)
 	}
-	if doc.Signature.KeyID != "spiffe://sigstore.vulnetix.com/code-scanner" {
+	if doc.Signature.KeyID != "spiffe://sigstore.vulnes.is/code-scanner" {
 		t.Fatalf("keyId = %q, want the signer's SPIFFE ID", doc.Signature.KeyID)
 	}
 	if _, err := base64.RawURLEncoding.DecodeString(doc.Signature.Value); err != nil {

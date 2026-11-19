@@ -86,7 +86,7 @@ var documentOnly = map[string]string{
 	"Article 5":             "whether a system performs a prohibited practice depends on how it is used, which no inventory or scan reveals",
 	"Article 6":             "Annex III classification turns on the system's purpose, not on its components",
 	"Article 13":            "instructions for use are a provider-authored document",
-	"Articles 51-55":        "systemic-risk classification hinges on a training-compute (FLOP) figure Vulnetix does not measure",
+	"Articles 51-55":        "systemic-risk classification hinges on a training-compute (FLOP) figure Vulnesis does not measure",
 	"Article 73":            "the filing to the market-surveillance authority is made by a person outside this system; detection and disposition are evidenced, the report itself is attached",
 	"Article 10":            "10(2)-(5) asks for dataset design choices, provenance, examination for bias and representativeness — a bill of materials records that a dataset exists, not how it was governed",
 	"Article 53":            "the copyright policy and the training-content summary are documents the provider authors; the inventory is only the machine-readable half of the technical documentation",
@@ -151,7 +151,7 @@ func TestManualEvidencePromotesTheDocumentOnlyArticles(t *testing.T) {
 			t.Fatalf("%s missing from the report", id)
 		}
 		if before.Status == StatusSatisfied {
-			t.Errorf("%s = satisfied with nothing attached; Vulnetix holds no evidence for it", id)
+			t.Errorf("%s = satisfied with nothing attached; Vulnesis holds no evidence for it", id)
 		}
 
 		with := base

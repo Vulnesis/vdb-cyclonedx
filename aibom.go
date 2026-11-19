@@ -2,7 +2,7 @@ package cyclonedx
 
 // AIBOM — AI Bill of Materials.
 //
-// This file owns the Vulnetix AIBOM format end to end: the detection data model
+// This file owns the Vulnesis AIBOM format end to end: the detection data model
 // (the contract between a producer's detection layer and the BOM), the property
 // vocabulary (vulnetix:ai/*, vulnetix:git/*, vulnetix:env/*), creation
 // (BuildAIBOM: detections -> validated CycloneDX), and parsing (ParseAIBOM:

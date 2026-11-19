@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-// Markers let a VEX document Vulnetix minted say which suppression rule it came
+// Markers let a VEX document Vulnesis minted say which suppression rule it came
 // from. When the document comes back (a CLI passes it to --vex-file, a
 // customer re-uploads it), the marker links the statement to that rule instead
 // of creating a second one. Without it, every mint would breed a duplicate rule

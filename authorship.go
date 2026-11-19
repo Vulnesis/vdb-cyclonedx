@@ -437,7 +437,7 @@ func (t *Tools) Find(name string) *Component {
 // Superseding is keyed on the tool's name, not on name+version: a seed written
 // by an older release names this same command at an older version, and a
 // document naming one command at two versions cannot be read as a statement
-// about which of them produced it. Other Vulnetix entries are left alone — a
+// about which of them produced it. Other Vulnesis entries are left alone — a
 // document authored by the SCA pass and later enriched by the licence pass
 // legitimately names both, because they are different tools.
 func prependAuthoringTool(existing []Component, tool Component) []Component {
@@ -509,10 +509,10 @@ func authorshipFrom(explicit *Authorship, toolName, toolVersion, generatedAt str
 	return a
 }
 
-// toolComponentFor builds a tool entry from a bare name and version. Vulnetix's
+// toolComponentFor builds a tool entry from a bare name and version. Vulnesis's
 // own commands get the full identity — group, purl, references — while a name
 // this product does not own is recorded as given, because attributing a third
-// party's tool to Vulnetix would misstate who produced the document.
+// party's tool to Vulnesis would misstate who produced the document.
 func toolComponentFor(name, version string) Component {
 	if IsVulnetixToolName(name) {
 		return VulnetixTool(name, version)

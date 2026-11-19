@@ -131,5 +131,5 @@ Extend the existing `cyclonedx_tools_test.go` (already covers 1.2–1.5) to **1.
 
 ## Companion plans
 - `vdb-sca-match/PLAN.md` — the matching engine module.
-- `~/.claude/plans/create-a-new-repo-distributed-wolf.md` and `Vulnetix/PLAN.md` — the
+- `~/.claude/plans/create-a-new-repo-distributed-wolf.md` and `Vulnesis/PLAN.md` — the
   `vdb-sca-monitor` service that consumes both modules.

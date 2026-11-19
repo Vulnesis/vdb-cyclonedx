@@ -157,7 +157,7 @@ func TestReauthoringSupersedesAnOlderSelfIdentification(t *testing.T) {
 	}
 }
 
-// Two different Vulnetix commands are two different tools. The SCA pass
+// Two different Vulnesis commands are two different tools. The SCA pass
 // authoring a document and the licence pass later enriching it is a real
 // sequence, and the document should name both.
 func TestReauthoringKeepsOtherVulnetixToolEntries(t *testing.T) {
@@ -336,7 +336,9 @@ func TestParseLifecyclePhasesRejectsUnknownValues(t *testing.T) {
 func TestIsVulnetixToolNameCoversLegacyAndSARIFSpellings(t *testing.T) {
 	for _, name := range []string{
 		ToolSCA, ToolCDX, ToolAIBOM, ToolCBOM, ToolContainers, ToolLicense,
-		"vulnetix", "vulnetix-sca", "Vulnetix Malscan", "vulnetix ",
+		"vulnetix", "vulnetix-sca", "Vulnesis Malscan", "vulnetix ",
+		// parity with Vulnetix: either name, id and display forms
+		"vulnesis", "vulnesis-sca", "VULNESIS", "vulnesis ",
 	} {
 		if !IsVulnetixToolName(name) {
 			t.Errorf("IsVulnetixToolName(%q) = false", name)

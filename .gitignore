@@ -19,7 +19,7 @@ go.work.sum
 .vscode/
 .DS_Store
 
-# Vulnetix scan output and credentials
+# Vulnesis scan output and credentials
 .vulnetix/
 !.vulnetix/workflow.yaml
 !.vulnetix/workflow.yaml

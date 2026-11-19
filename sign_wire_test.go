@@ -22,7 +22,7 @@ func (s *capturingSigner) Sign(_ context.Context, payload []byte) (RawSignature,
 	return RawSignature{
 		DER:       []byte{0x30, 0x06, 0x02, 0x01, 0x01, 0x02, 0x01, 0x01},
 		Algorithm: "ES256",
-		KeyID:     "spiffe://sigstore.vulnetix.com/code-scanner",
+		KeyID:     "spiffe://sigstore.vulnes.is/code-scanner",
 		// Non-empty so the envelope carries the cert member, which the test
 		// pins as part of the wire contract.
 		CertificatePEM: "-----BEGIN CERTIFICATE-----\nMIIB\n-----END CERTIFICATE-----\n",

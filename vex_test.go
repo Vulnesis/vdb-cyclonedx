@@ -168,7 +168,7 @@ func TestDocumentCarriesItsOwnProvenance(t *testing.T) {
 	doc := buildOrFail(t, []VEXFinding{{
 		CVEID: "CVE-2025-4444", Package: "lodash", Ecosystem: "npm", InstalledVer: "4.17.20",
 		Status: "not_affected", Justification: "code_not_reachable",
-	}}, VEXOptions{ToolName: "vulnetix", ToolVersion: "v3.84.19", AuthorName: "Vulnetix"})
+	}}, VEXOptions{ToolName: "vulnetix", ToolVersion: "v3.84.19", AuthorName: "Vulnesis"})
 
 	serial, _ := doc["serialNumber"].(string)
 	if !strings.HasPrefix(serial, "urn:uuid:") {

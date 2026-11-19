@@ -154,7 +154,7 @@ func invLink(ctx ReportContext) string {
 
 // ── A.2 Policies ──────────────────────────────────────────────────────────────
 
-// rA22 evidences the documented policy set. Vulnetix holds the machine-readable
+// rA22 evidences the documented policy set. Vulnesis holds the machine-readable
 // half of it: the risk-ranking strategy, the remediation SLA policy, the scoring
 // methodology, the license policy, the build gate and the runtime guardrails.
 func rA22(ctx ReportContext) ControlMapping {
@@ -231,7 +231,7 @@ func rA22(ctx ReportContext) ControlMapping {
 	default:
 		m.Status = StatusPartial
 		m.Rationale = plural(policies, "topic-specific policy") + " is configured; the overarching AI policy document itself is human-authored — attach it as manual evidence."
-		m.Gaps = append(m.Gaps, "Overarching AI policy document not held by Vulnetix")
+		m.Gaps = append(m.Gaps, "Overarching AI policy document not held by Vulnesis")
 	}
 	return m
 }
@@ -361,7 +361,7 @@ func rA52(ctx ReportContext, inv inventory) ControlMapping {
 			Detail: "the organization's impact assessment: affected persons, societal effects and the conclusions drawn",
 		})
 		m.Status = StatusSatisfied
-		m.Rationale = "A reproducible estimation method is applied to identified risks, and the organization has attached its impact assessment. Vulnetix does not read the attachment — an assessor samples it."
+		m.Rationale = "A reproducible estimation method is applied to identified risks, and the organization has attached its impact assessment. Vulnesis does not read the attachment — an assessor samples it."
 
 		return m
 	}
@@ -430,7 +430,7 @@ func rA624(ctx ReportContext, inv inventory) ControlMapping {
 	// read "The AI/software is verified and validated" — the slash is where the
 	// substitution happened: A.6.2.4 asks whether *the AI system* was verified
 	// and validated against its requirements, and SAST/SCA runs over the
-	// repository answer about the software delivering it. Vulnetix can see AI
+	// repository answer about the software delivering it. Vulnesis can see AI
 	// evaluation tooling in the AI-BOM, and that is the machine record of the
 	// AI half; without it the control is half-evidenced and says so.
 	recurring := ctx.ScannerRunCount > 1
@@ -935,7 +935,7 @@ func rA54(ctx ReportContext) ControlMapping {
 			Detail: "the organization's assessment of impacts on individuals and society",
 		})
 		m.Status = StatusSatisfied
-		m.Rationale = "The organization has attached its assessment of the AI system's impacts on individuals and society. Vulnetix does not read the attachment — an assessor samples it."
+		m.Rationale = "The organization has attached its assessment of the AI system's impacts on individuals and society. Vulnesis does not read the attachment — an assessor samples it."
 
 		return m
 	}
@@ -947,7 +947,7 @@ func rA54(ctx ReportContext) ControlMapping {
 		})
 	}
 	m.Status = StatusInformational
-	m.Rationale = "Not evaluable from Vulnetix data — impacts on individuals and society are assessed by people, from context no scanner holds. Attach the assessment against this control and it will be reported."
+	m.Rationale = "Not evaluable from Vulnesis data — impacts on individuals and society are assessed by people, from context no scanner holds. Attach the assessment against this control and it will be reported."
 	m.Gaps = append(m.Gaps, "No impact assessment for individuals and society on record")
 
 	return m

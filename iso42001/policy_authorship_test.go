@@ -16,7 +16,7 @@ import (
 
 func policyCtx(custom bool) ReportContext {
 	return ReportContext{
-		RiskStrategyName:      "Vulnetix default",
+		RiskStrategyName:      "Vulnesis default",
 		RiskStrategyRuleCount: 22,
 		RiskStrategyIsCustom:  custom,
 		TriagePolicyName:      "Standard",
@@ -29,7 +29,7 @@ func policyCtx(custom bool) ReportContext {
 func TestAiPolicyDoesNotCountTheVendorDefaultAsAnOrgPolicy(t *testing.T) {
 	m := rA22(policyCtx(false))
 	if m.Status == euaiact.StatusSatisfied {
-		t.Errorf("A.2.2 = satisfied on three organizational policies plus Vulnetix's seeded default ranking")
+		t.Errorf("A.2.2 = satisfied on three organizational policies plus Vulnesis's seeded default ranking")
 	}
 	// The default is still cited: an assessor should see the ranking that is
 	// actually in force, labelled as the product's.

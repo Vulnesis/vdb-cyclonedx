@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// The identity a Vulnetix service signs with.
+// The identity a Vulnesis service signs with.
 //
 // The CLI signs with whatever identity the runner already has, because a scan
 // run in a customer's CI should be attested by that customer. A service has no
@@ -31,7 +31,7 @@ import (
 // one of these for the lifetime of the process.
 type WorkloadIdentity struct {
 	// Issuer is the application's OIDC issuer, for example
-	// https://auth.vulnetix.com/application/o/sigstore/. Required.
+	// https://auth.vulnes.is/application/o/sigstore/. Required.
 	Issuer string
 	// ClientID is the provider's generated client id. Required.
 	ClientID string

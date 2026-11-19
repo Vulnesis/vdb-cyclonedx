@@ -386,7 +386,7 @@ type ReportContext struct {
 
 	// SonarQube findings. A second, independent static-analysis tool whose
 	// results were read by no report — so every "analysis breadth" and
-	// "no weaknesses observed" claim rested on Vulnetix's own SARIF alone,
+	// "no weaknesses observed" claim rested on Vulnesis's own SARIF alone,
 	// understating the assurance actually performed.
 	//
 	// SonarqubeFinding carries orgId and createdAt but no repository, so these
@@ -399,7 +399,7 @@ type ReportContext struct {
 
 	// GitHub secret-scanning alerts, from GitHubSecretScanningAlert. Detection
 	// by a second, independent tool plus a recorded resolution — which is
-	// stronger evidence for a secrets control than Vulnetix's own scan count.
+	// stronger evidence for a secrets control than Vulnesis's own scan count.
 	SecretAlertTotal    int
 	SecretAlertResolved int
 	SecretAlertOpen     int
@@ -527,7 +527,7 @@ type ReportContext struct {
 	FirewallChangesWithReason int
 
 	// Code-host access control, from GitHubOrganization. Distinct from
-	// SsoEnforced, which is authentication into *Vulnetix*: the source code
+	// SsoEnforced, which is authentication into *Vulnesis*: the source code
 	// lives in the code host, so an organization enforcing SSO here while its
 	// GitHub organization requires no second factor has the weaker control on
 	// the more valuable asset. ISO A.5.15-A.5.18 and A.8.5, and PCI 7 and 8,
@@ -601,7 +601,7 @@ type ReportContext struct {
 	BinaryHashedCount  int // rows carrying sha256/ssdeep/tlsh fingerprints
 	BinaryMalwareCount int // MalwareBazaar hits
 
-	// ── Identity & access posture (Vulnetix platform accounts) ────────────
+	// ── Identity & access posture (Vulnesis platform accounts) ────────────
 	MemberCount          int
 	MfaCredentialCount   int
 	MfaMemberCount       int
@@ -848,7 +848,7 @@ func reportArticle5(ctx ReportContext) ArticleMapping {
 	if n := ctx.ManualEvidenceCount(id); n > 0 {
 		m.Status = StatusSatisfied
 		m.Rationale = "The organization has recorded its assessment against the prohibited practices (" +
-			plural(n, "attached document") + "). Vulnetix cannot observe how a system is used — an assessor samples the attachment."
+			plural(n, "attached document") + "). Vulnesis cannot observe how a system is used — an assessor samples the attachment."
 		m.Evidence = append(m.Evidence, EvidenceItem{
 			Component: plural(n, "attached document"), Kind: "manual",
 			Detail: "Prohibited-practices assessment, supplied by the organization",
@@ -888,7 +888,7 @@ func reportArticle6(ctx ReportContext) ArticleMapping {
 	return m
 }
 
-// reportArticle13 covers instructions for use. Vulnetix holds none of this —
+// reportArticle13 covers instructions for use. Vulnesis holds none of this —
 // it is a provider-authored document — so the article's only path is the
 // customer attaching it. That path used to be closed: the article was
 // hardwired not-applicable while its own rationale asked for an upload.
@@ -904,14 +904,14 @@ func reportArticle13(ctx ReportContext) ArticleMapping {
 		// the one the data supports. It reads the same as Articles 5 and 6,
 		// which are unevidenceable for the same reason.
 		m.Status = StatusInformational
-		m.Rationale = "Not evaluable from Vulnetix data — instructions-for-use are provider-authored documents. This is not a finding that the obligation does not apply; upload the instructions as manual evidence against this article and it will be assessed."
+		m.Rationale = "Not evaluable from Vulnesis data — instructions-for-use are provider-authored documents. This is not a finding that the obligation does not apply; upload the instructions as manual evidence against this article and it will be assessed."
 		m.Gaps = append(m.Gaps, "No instructions-for-use document on record")
 
 		return m
 	}
 	m.Status = StatusSatisfied
 	m.Rationale = "Satisfied on customer-supplied evidence: " + plural(n, "document") +
-		" attached to this article. Vulnetix does not read the contents — an assessor samples the attachment itself."
+		" attached to this article. Vulnesis does not read the contents — an assessor samples the attachment itself."
 	m.Evidence = append(m.Evidence, EvidenceItem{
 		Component: plural(n, "attached document"), Kind: "manual",
 		Detail: "Instructions for use, supplied by the organization",
@@ -985,7 +985,7 @@ func StampInventoryRefs(ctx ReportContext, evidence []EvidenceItem) {
 
 // reportArticle9 covers the risk-management system: a continuous, iterated
 // process that identifies risks, evaluates them, and adopts targeted measures.
-// Vulnetix evidences this directly — the risk-prioritization strategy is the
+// Vulnesis evidences this directly — the risk-prioritization strategy is the
 // documented evaluation method, the triage policy sets the treatment windows,
 // and the snapshot rollup is the per-iteration record.
 func reportArticle9(ctx ReportContext) ArticleMapping {
@@ -1114,7 +1114,7 @@ func reportArticle9(ctx ReportContext) ArticleMapping {
 		m.Rationale = "The risk-management system is continuous and documented end to end: risks are identified by recurring assessment, evaluated by an ordered ranking strategy the organization authored, and treated within committed per-severity windows."
 	case ctx.HasRiskStrategy() && ctx.HasRemediationSLA() && identified:
 		m.Status = StatusPartial
-		m.Rationale = "Risks are identified continuously and treated within committed windows, but they are evaluated by Vulnetix's seeded default ranking rather than a method this organization established — Article 9 places that obligation on the provider."
+		m.Rationale = "Risks are identified continuously and treated within committed windows, but they are evaluated by Vulnesis's seeded default ranking rather than a method this organization established — Article 9 places that obligation on the provider."
 		m.Gaps = append(m.Gaps, "The risk-evaluation method in force is the product default, not an organization-authored strategy")
 	case identified:
 		m.Status = StatusPartial
@@ -1196,7 +1196,7 @@ func reportArticle10(ctx ReportContext) ArticleMapping {
 		m.Gaps = append(m.Gaps, "No dataset artifact resolved")
 	case attached > 0:
 		m.Status = StatusSatisfied
-		m.Rationale = "Datasets and the infrastructure that consumes them are inventoried, and the organization has attached its data-governance record. Vulnetix does not read the attachment — an assessor samples it."
+		m.Rationale = "Datasets and the infrastructure that consumes them are inventoried, and the organization has attached its data-governance record. Vulnesis does not read the attachment — an assessor samples it."
 	default:
 		m.Status = StatusPartial
 		m.Rationale = "Datasets and the infrastructure that consumes them are inventoried. Inventory is not governance: Article 10(2)-(5) asks for the design choices behind each dataset, its provenance and collection, its examination for bias, and whether it is representative of the intended purpose — none of which a bill of materials records."
@@ -1619,7 +1619,7 @@ func reportArticle51(ctx ReportContext) ArticleMapping {
 	if n := ctx.ManualEvidenceCount("Articles 51-55"); n > 0 {
 		m.Status = StatusSatisfied
 		m.Rationale = "GPAI/compute signals are present, and the systemic-risk assessment is supplied as customer evidence (" +
-			plural(n, "attached document") + "). Vulnetix does not measure training compute — an assessor samples the attachment."
+			plural(n, "attached document") + "). Vulnesis does not measure training compute — an assessor samples the attachment."
 		m.Evidence = append(m.Evidence, EvidenceItem{
 			Component: plural(n, "attached document"), Kind: "manual",
 			Detail: "Systemic-risk / training-compute assessment, supplied by the organization",
@@ -1628,7 +1628,7 @@ func reportArticle51(ctx ReportContext) ArticleMapping {
 		return m
 	}
 	m.Status = StatusInformational
-	m.Rationale = "GPAI/compute signals are present. The systemic-risk threshold is a training-compute (FLOP) figure Vulnetix does not measure — attach the assessment as manual evidence and it will be reported."
+	m.Rationale = "GPAI/compute signals are present. The systemic-risk threshold is a training-compute (FLOP) figure Vulnesis does not measure — attach the assessment as manual evidence and it will be reported."
 	m.Gaps = append(m.Gaps, "Training compute (FLOP) not measured")
 	return m
 }
@@ -1706,7 +1706,7 @@ func methodologyClause(methodologies []string) string {
 // The article was absent from the report entirely while every signal it needs
 // was loaded and unread: the alert count, the status and type breakdowns, the
 // acknowledgement and dismissal split, the overdue count and the notification
-// routes. Vulnetix cannot evidence the report *to the authority* — that is a
+// routes. Vulnesis cannot evidence the report *to the authority* — that is a
 // filing, made by a person, outside this system — so the article reports the
 // detection and disposition half and says plainly which half is missing.
 func reportArticle73(ctx ReportContext) ArticleMapping {
@@ -1770,7 +1770,7 @@ func reportArticle73(ctx ReportContext) ArticleMapping {
 		m.Gaps = append(m.Gaps, "No notification route configured")
 	case attached > 0:
 		m.Status = StatusSatisfied
-		m.Rationale = "Incidents are detected, acknowledged by a named responder and delivered to a configured route, and the organization has attached its record of what was reported to the market-surveillance authority. Vulnetix does not read the attachment — an assessor samples it."
+		m.Rationale = "Incidents are detected, acknowledged by a named responder and delivered to a configured route, and the organization has attached its record of what was reported to the market-surveillance authority. Vulnesis does not read the attachment — an assessor samples it."
 	default:
 		m.Status = StatusPartial
 		m.Rationale = "Incidents are detected, acknowledged by a named responder and delivered to a route the organization configured. The report to the market-surveillance authority is a filing made outside this system and needs manual evidence."
@@ -1833,7 +1833,7 @@ func reportArticle53(ctx ReportContext) ArticleMapping {
 	}
 	if attached > 0 {
 		m.Status = StatusSatisfied
-		m.Rationale = "Models are inventoried, and the organization has attached the provider documentation this article asks for — technical documentation, downstream information, the copyright policy and the training-content summary. Vulnetix does not read the attachments; an assessor samples them."
+		m.Rationale = "Models are inventoried, and the organization has attached the provider documentation this article asks for — technical documentation, downstream information, the copyright policy and the training-content summary. Vulnesis does not read the attachments; an assessor samples them."
 		m.Evidence = append(m.Evidence, EvidenceItem{
 			Component: plural(attached, "attached document"), Kind: "manual",
 			Detail: "GPAI provider documentation supplied by the organization",
@@ -1857,7 +1857,7 @@ func reportArticle53(ctx ReportContext) ArticleMapping {
 // Unlike 53, this one is partly evidenceable: evaluation workloads, the runtime
 // guardrails that constrain model use, the incident trail and the security
 // testing of the estate are all recorded. Only the *classification* — whether
-// the model crosses the compute threshold — is outside what Vulnetix measures,
+// the model crosses the compute threshold — is outside what Vulnesis measures,
 // and that is Article 51's question, not this one's.
 func reportArticle55(ctx ReportContext) ArticleMapping {
 	const id = "Article 55"
@@ -2089,7 +2089,7 @@ func reportArticle20(ctx ReportContext) ArticleMapping {
 
 // reportArticle4 covers AI literacy: the provider and the deployer must ensure
 // a sufficient level of AI literacy among the people who operate their systems.
-// It binds every organization using AI, and it was absent. Vulnetix cannot see
+// It binds every organization using AI, and it was absent. Vulnesis cannot see
 // a training programme, but it can see how many people the estate is exposed to
 // and that a person, not a machine, is making decisions in it.
 func reportArticle4(ctx ReportContext) ArticleMapping {
@@ -2121,14 +2121,14 @@ func reportArticle4(ctx ReportContext) ArticleMapping {
 		return m
 	}
 	m.Status = StatusInformational
-	m.Rationale = "Not evaluable from Vulnetix data — a literacy programme, its content and its completion records live outside this platform. What is observable is how many people have access to the estate and whether decisions in it are attributable to them."
+	m.Rationale = "Not evaluable from Vulnesis data — a literacy programme, its content and its completion records live outside this platform. What is observable is how many people have access to the estate and whether decisions in it are attributable to them."
 	m.Gaps = append(m.Gaps, "No AI-literacy training or guidance on record")
 
 	return m
 }
 
 // reportArticle18 covers documentation retention: the technical documentation,
-// the QMS documentation, approvals and decisions kept for ten years. Vulnetix
+// the QMS documentation, approvals and decisions kept for ten years. Vulnesis
 // holds documents and can say how far back its own record goes, but a ten-year
 // retention commitment is a policy, not an observation.
 func reportArticle18(ctx ReportContext) ArticleMapping {

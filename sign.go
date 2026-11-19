@@ -75,8 +75,8 @@ type RawSignature struct {
 	// Algorithm is the JWA name of the suite, for example ES256.
 	Algorithm string
 	// KeyID identifies the signer. For a keyless signature this is the
-	// certificate identity, which for Vulnetix workloads is the SPIFFE ID
-	// (spiffe://sigstore.vulnetix.com/code-scanner). For a signature made with
+	// certificate identity, which for Vulnesis workloads is the SPIFFE ID
+	// (spiffe://sigstore.vulnes.is/code-scanner). For a signature made with
 	// a held key it is the key alias or ARN.
 	KeyID string
 	// CertificatePEM is the certificate chain for a keyless signature, leaf
