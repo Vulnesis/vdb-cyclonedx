@@ -30,7 +30,7 @@ const (
 
 	VulnetixToolGroup = "Vulnesis"
 	VulnetixSiteURL   = "https://www.vulnes.is"
-	VulnetixRepoURL   = "https://github.com/vulnetix/cli"
+	VulnetixRepoURL   = "https://github.com/vulnesis/cli"
 
 	// UnknownToolVersion is what an unversioned build reports. It is a valid
 	// version string that sorts below every release, so a consumer comparing
