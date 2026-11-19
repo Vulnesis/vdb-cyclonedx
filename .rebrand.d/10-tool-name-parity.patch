@@ -1,0 +1,35 @@
+diff --git a/authorship_test.go b/authorship_test.go
+index 882c2b1..f79e401 100644
+--- a/authorship_test.go
++++ b/authorship_test.go
+@@ -337,6 +337,8 @@ func TestIsVulnetixToolNameCoversLegacyAndSARIFSpellings(t *testing.T) {
+ 	for _, name := range []string{
+ 		ToolSCA, ToolCDX, ToolAIBOM, ToolCBOM, ToolContainers, ToolLicense,
+ 		"vulnetix", "vulnetix-sca", "Vulnesis Malscan", "vulnetix ",
++		// parity with Vulnetix: either name, id and display forms
++		"vulnesis", "vulnesis-sca", "VULNESIS", "vulnesis ",
+ 	} {
+ 		if !IsVulnetixToolName(name) {
+ 			t.Errorf("IsVulnetixToolName(%q) = false", name)
+diff --git a/tooling.go b/tooling.go
+index e4fa04a..6e057b9 100644
+--- a/tooling.go
++++ b/tooling.go
+@@ -88,9 +88,14 @@ func IsVulnetixToolName(name string) bool {
+ 	if vulnetixToolNames[trimmed] {
+ 		return true
+ 	}
+-	return trimmed == "vulnetix" ||
+-		strings.HasPrefix(trimmed, "vulnetix-") ||
+-		strings.HasPrefix(trimmed, "vulnetix ")
++	// Vulnesis runs in parity with Vulnetix: documents produced under
++	// either name are ours, in their "<name>-x" id and "<name> x" display forms.
++	for _, brand := range []string{"vulnetix", "vulnesis"} {
++		if trimmed == brand || strings.HasPrefix(trimmed, brand+"-") || strings.HasPrefix(trimmed, brand+" ") {
++			return true
++		}
++	}
++	return false
+ }
+ 
+ // IsVulnetixTool reports whether a tool component identifies this product.

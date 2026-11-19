@@ -1,0 +1,3 @@
+keep "Vulnetix Malscan", "VULNETIX"
+keep "vulnesis", "vulnetix"
+keep "notvulnetix"
