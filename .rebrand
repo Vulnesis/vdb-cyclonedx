@@ -1,5 +1,0 @@
-# scripts/rebrand.py config (Vulnesis/ops).
-# Shared by both brands: only documents are rebranded. The code keeps Vulnetix
-# defaults; VULNETIX_BRAND=vulnesis selects vulnes.is at run time.
-docs-only
-keep VULNETIX_
